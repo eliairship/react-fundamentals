@@ -26,24 +26,32 @@ test('calls the onSubmitUsername handler when the submit is fired', () => {
   expect(global.alert).toHaveBeenCalledTimes(1)
 })
 
-test('should render an error when uppercase letter is typed in usernameInput', () => {
+test('should render lowercase text in input when uppercase is typed', () => {
   render(<App />)
   const input = screen.getByLabelText(/username/i)
-  const errorMessage = screen.getByTestId('error-message')
-  const username = 'Jenny'
+  const username = 'JENNy'
   userEvent.type(input, username)
-
-  // expect
-  expect(errorMessage).toHaveTextContent('Username must be lowercase')
+  expect(input.value).toBe('jenny')
 })
-test('should disable the button when uppercase letter is typed in usernameInput', () => {
-  render(<App />)
-  const input = screen.getByLabelText(/username/i)
-  const submit = screen.getByText(/submit/i)
 
-  const username = 'Jenny'
-  userEvent.type(input, username)
+// test('should render an error when uppercase letter is typed in usernameInput', () => {
+//   render(<App />)
+//   const input = screen.getByLabelText(/username/i)
+//   const errorMessage = screen.getByTestId('error-message')
+//   const username = 'Jenny'
+//   userEvent.type(input, username)
 
-  // expect
-  expect(submit).toBeDisabled()
-})
+//   // expect
+//   expect(errorMessage).toHaveTextContent('Username must be lowercase')
+// })
+// test('should disable the button when uppercase letter is typed in usernameInput', () => {
+//   render(<App />)
+//   const input = screen.getByLabelText(/username/i)
+//   const submit = screen.getByText(/submit/i)
+
+//   const username = 'Jenny'
+//   userEvent.type(input, username)
+
+//   // expect
+//   expect(submit).toBeDisabled()
+// })
